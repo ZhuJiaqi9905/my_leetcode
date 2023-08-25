@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.1...3.24)
+project(LeetCode VERSION 1.0)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+enable_testing()
+find_package(GTest CONFIG REQUIRED)
+link_libraries(GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_subdirectory("${CMAKE_SOURCE_DIR}/easy")
+add_subdirectory("${CMAKE_SOURCE_DIR}/medium")
+add_subdirectory("${CMAKE_SOURCE_DIR}/hard")
