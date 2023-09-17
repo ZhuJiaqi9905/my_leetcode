@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/zjq/code/cpp/my_leetcode/build/medium",
-  "command": "/usr/bin/c++  -isystem /opt/vcpkg/installed/x64-linux/include -g -std=gnu++17 -o CMakeFiles/739.dir/739_daily_temperatures.cc.o -c /home/zjq/code/cpp/my_leetcode/medium/739_daily_temperatures.cc",
-  "file": "/home/zjq/code/cpp/my_leetcode/medium/739_daily_temperatures.cc"
-}
-]
