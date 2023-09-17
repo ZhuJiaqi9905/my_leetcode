@@ -1,2 +1,3 @@
 
 add_executable(739 739_daily_temperatures.cc)
+add_executable(797 797_all_paths_from_source_to_target.cc)
