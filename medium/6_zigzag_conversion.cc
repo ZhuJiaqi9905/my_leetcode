@@ -12,7 +12,8 @@ public:
     for (int i = 0; i < numRows; ++i) {
       for (int j = 0; j + i < n; j += cyclen) {
         ret += s[j + i];
-        if (i != 0 && i != numRows - 1 && j + cyclen - i < n) {
+        if (i != 0 && i != numRows - 1 &&
+            j + cyclen - i < n) { // 处理非两端的行
           ret += s[j + cyclen - i];
         }
       }
@@ -20,4 +21,4 @@ public:
     return ret;
   }
 };
-int main(){}
+int main() {}
