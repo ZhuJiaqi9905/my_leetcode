@@ -1,27 +1,25 @@
-#include <set>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
 class Solution {
 public:
   int lengthOfLongestSubstring(string s) {
-    if (s.empty())
+    if (s.empty()) {
       return 0;
+    }
     int i = 0;
-    int j = 0; //双指针
-    set<char> mySet;
+    int j = 0;
+    unordered_set<char> char_set;
     int n = s.size();
     int ans = 0;
-    while (j < n) {
-      auto iter = mySet.find(s[j]);
-      if (iter == mySet.end()) {
-        mySet.insert(s[j]);
-        ans = max(ans, (int)mySet.size());
-        j++;
-      } else {
-        mySet.erase(s[i]);
+    for (int j = 0; j < n; ++j) {
+      while (char_set.find(s[j]) != char_set.end()) {
+        char_set.erase(s[i]);
         i++;
       }
+      char_set.emplace(s[j]);
+      ans = max(ans, j - i + 1);
     }
     return ans;
   }
 };
+int main() {}
