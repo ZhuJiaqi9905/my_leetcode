@@ -21,30 +21,21 @@ using namespace std;
 class Solution {
 public:
   vector<int> dailyTemperatures(vector<int> &temperatures) {
-    int s = temperatures.size();
+    int n = temperatures.size();
     stack<int> stack;
-    vector<int> ans(s, 0);
-    for (auto idx = s - 1; idx >= 0; --idx) {
-      if (stack.empty()) {
-        stack.emplace(idx);
-        ans[idx] = 0;
-      } else {
-        while (!stack.empty() &&
-               temperatures[stack.top()] <= temperatures[idx]) {
-          stack.pop();
-        }
-        if (stack.empty()) {
-          ans[idx] = 0;
-        } else {
-          ans[idx] = stack.top() - idx;
-        }
-        stack.emplace(idx);
+    vector<int> ans(n, 0);
+    for (int i = 0; i < n; ++i) {
+      auto t = temperatures[i];
+      // 维护一个单调递减的栈
+      while (!stack.empty() && t > temperatures[stack.top()]) {
+        ans[stack.top()] = i - stack.top();
+        stack.pop();
       }
+      stack.push(i);
     }
     return ans;
   }
 };
-
 int main() {
   Solution s;
   //   auto ans = s.dailyTemperatures(temperatures);
@@ -59,5 +50,4 @@ int main() {
   auto t3 = vector<int>{30, 60, 90};
   auto a3 = vector<int>{1, 1, 0};
   EXPECT_EQ(s.dailyTemperatures(t3), a3);
-
 }
