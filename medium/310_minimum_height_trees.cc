@@ -6,15 +6,15 @@ public:
     void dfs(int u, vector<int> & dist, vector<int> & parent, const vector<vector<int>> & adj) {
         for (auto & v : adj[u]) {
             if (dist[v] < 0) {
-                dist[v] = dist[u] + 1;
-                parent[v] = u;
+                dist[v] = dist[u] + 1; // 计算节点v到初始节点的距离
+                parent[v] = u; // 记录从初始节点开始dfs时，节点v的父节点
                 dfs(v, dist, parent, adj); 
             }
         }
     }
 
     int findLongestNode(int u, vector<int> & parent, const vector<vector<int>> & adj) {
-        int n = adj.size();
+        int n = adj.size(); // 节点个数
         vector<int> dist(n, -1);
         dist[u] = 0;
         dfs(u, dist, parent, adj);
@@ -33,6 +33,7 @@ public:
         if (n == 1) {
             return {0};
         }
+        // 构造图 adj[i]记录与节点i相连的点
         vector<vector<int>> adj(n);
         for (auto & edge : edges) {
             adj[edge[0]].emplace_back(edge[1]);
