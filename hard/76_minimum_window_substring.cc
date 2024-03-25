@@ -4,20 +4,20 @@ class Solution {
 public:
   string minWindow(string s, string t) {
     unordered_map<char, int> diff; // 最小覆盖子串必须满足diff[c] <= 0
-    unordered_set<char> char_set;
-    int diff_chars = 0; // 记录目前有差异的字符的数量。
+    int diff_chars = 0;            // 记录目前有差异的字符的数量。
     for (const auto &c : t) {
       diff[c] += 1;
-      char_set.insert(c);
-      diff_chars = char_set.size();
     }
+    diff_chars = diff.size();
     int n = s.size();
     int left = 0;
     int right = 0;
     string ans = "";
+
     for (; left <= n; ++left) {
+      // 尝试移动左指针
       if (left != 0) {
-        if (char_set.find(s[left - 1]) != char_set.end()) {
+        if (diff.count(s[left - 1])) {
           if (++diff[s[left - 1]] == 1) {
             diff_chars += 1;
           }
@@ -26,7 +26,7 @@ public:
 
       while (diff_chars != 0 && right < n) {
         const auto c = s[right];
-        if (char_set.find(c) != char_set.end()) {
+        if (diff.count(c)) {
           diff[c] -= 1;
           if (diff[c] == 0) {
             diff_chars -= 1;
@@ -39,7 +39,7 @@ public:
       }
       // 优化，去掉无用的冗余答案
       while (left < n) {
-        if (char_set.find(s[left]) == char_set.end()) {
+        if (!diff.count(s[left])) {
           left++;
         } else if (diff[s[left]] < 0) {
           diff[s[left]] += 1;

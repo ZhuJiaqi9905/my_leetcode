@@ -1,0 +1,1 @@
+add_executable(zijie512_1 1.cpp)
