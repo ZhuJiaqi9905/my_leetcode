@@ -1,0 +1,1 @@
+add_executable(huawei124_3 3.cpp)
