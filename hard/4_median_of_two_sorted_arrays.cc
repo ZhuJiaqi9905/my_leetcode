@@ -16,7 +16,7 @@ public:
       return getKth(nums1, 0, nums2, 0, (m + n + 1) / 2);
     }
   }
-  //找到两个有序数组中第k大元素。k从1开始取
+  //找到两个有序数组中第k大元素。k从1开始取。如果k从0开始取，那么k=1的中位数是0，1-0还是1；但是如果k从1开始取，k=2的中位数是1，2-1是1，会变小。
   int getKth(vector<int> &v1, int s1, vector<int> &v2, int s2, int k) {
     int len1 = v1.size();
     int len2 = v2.size();

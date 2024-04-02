@@ -22,4 +22,40 @@ public:
     return ans;
   }
 };
+// 滑动窗口的另一种写法
+class Solution2 {
+public:
+  int lengthOfLongestSubstring(string s) {
+    int n = s.size();
+    unordered_set<char> st;
+    int l = 0;
+    int r = 0;
+    int ans = 0;
+    for (l = 0; l < n; ++l) {
+      if (l != 0) {
+        st.erase(s[l - 1]);
+      }
+      while (r < n && st.find(s[r]) == st.end()) {
+        st.insert(s[r]);
+        r++;
+      }
+
+      ans = max(ans, r - l);
+      if (r >= n) {
+        break;
+      }
+      // 优化，一直删l的字符，直到和r的字符相同
+      while (l < n) {
+        if (s[l] != s[r]) {
+          st.erase(s[l]);
+          l++;
+        } else {
+          break;
+        }
+      }
+      // cout << l << " " << r << endl;
+    }
+    return ans;
+  }
+};
 int main() {}
