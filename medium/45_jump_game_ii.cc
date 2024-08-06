@@ -11,30 +11,20 @@ public:
     if (n == 1) {
       return 0;
     }
-    int cap = nums[0];
-    int i = 0;
-    int step = 1;
-    if (cap >= n - 1) {
-      return 1;
-    }
-    while (true) {
-      int max_cap = cap;
-      int idx = 0;
-      for (; i <= cap; ++i) {
-        if (nums[i] + i > max_cap) {
-          max_cap = nums[i] + i;
-          idx = i;
-        }
+    int res = 0;
+    int h = nums[0]; // 每次能跳到的极限位置
+    int idx = 0;     // 每次用来更新最远位置的起始位置
+    while (idx < n) {
+      // 获取能跳跃的最大位置
+      int max_h = 0;
+      for (int i = idx; i < n && i <= h; ++i) {
+        max_h = max(max_h, nums[i] + i);
       }
-      cap = max_cap;
-      i = idx;
-      std::cout << max_cap << " " << i << endl;
-      step++;
-      if (cap >= n - 1) {
-        break;
-      }
+      idx = h + 1; // 因为之前<=h的位置都被更新过了
+      h = max_h;
+      res++;
     }
-    return step;
+    return res;
   }
 };
 
